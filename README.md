@@ -22,14 +22,6 @@ The review answers four questions:
 | 3 | **Delivery** | How reliable is delivery against the promised date, and how does it affect customer satisfaction? |
 | 4 | **Customers** | How loyal are customers, and how much revenue do repeat buyers contribute? |
 
-### Scope
-
-| | |
-|---|---|
-| **Period** | September 2016 – August 2018 |
-| **Coverage** | Sales, products, sellers, customers, payments, delivery and reviews |
-| **Deliverables** | This report and a three-page interactive Power BI dashboard |
-
 ---
 
 
@@ -73,7 +65,7 @@ The prioritised actions are in [Section 4](#4-recommendations).
 
 ### 3.1 Revenue growth and sales mix
 
-![Marketplace Pulse](images/marketplace-pulse.png)
+![Marketplace Pulse](Report_Screenshots/marketplace_pulse.png)
 
 - **Growth has levelled off.** Monthly delivered revenue rose from under R$0.1M in late 2016 to a R$1.15M peak in November 2017, then held at roughly R$1.0M a month through August 2018.
 - **Volumes are still above last year.** In January to August 2018 the marketplace sold **60.32K items**, more than the **49.56K** sold across all of 2017.
@@ -91,7 +83,7 @@ The prioritised actions are in [Section 4](#4-recommendations).
 
 ### 3.2 Products and sellers
 
-![Product and Seller Performance](images/product-seller-performance.png)
+![Product and Seller Performance](Report_Screenshots/product_seller_performance.png)
 
 - **A large and growing seller base.** 2.97K active sellers sold 110.20K items across 32.22K products, at an average item price of R$119.98. Active sellers grew from 129 in 2016 to 1.69K in 2017 and 2.33K in 2018 (January to August).
 - **Low dependence on individual sellers.** The top five sellers each earn R$201K to R$247K, and together account for under 10% of revenue.
@@ -100,7 +92,7 @@ The prioritised actions are in [Section 4](#4-recommendations).
 
 ### 3.3 Delivery performance
 
-![Customer Experience and Retention](images/customer-experience-retention.png)
+![Customer Experience and Retention](Report_Screenshots/customer_retention.png)
 
 *The Customer Experience & Retention page covers both this section and 3.4.*
 
@@ -203,7 +195,7 @@ Raw CSV files → Python (Pandas) → BigQuery tables → SQL reporting views �
 
 **Data model**
 
-![Data model](images/data-model.png)
+![Data model](Report_Screenshots/data_model.png)
 
 | Table | Grain (one row per…) | Role |
 |-------|----------------------|------|
@@ -225,12 +217,12 @@ All relationships are one-to-many with single-direction filtering. Planned model
 ```
 .
 ├── README.md
-├── python/        # Data loading, cleaning and profiling notebooks
-├── sql/           # BigQuery view definitions (vw_*)
-├── powerbi/       # Power BI report (.pbix)
-└── images/        # Dashboard and data model screenshots
+├── 01_Pre_EDA_DataValidation.ipynb   # Python data validation notebook
+├── OList_EDA_SQL_Queries/            # Exploratory SQL queries (BigQuery)
+├── OList_EDA_SQL_TableViews/         # Reporting view definitions (vw_*)
+├── OList_Sales_Analytics.pbix        # Power BI report
+├── Report_Screenshots/               # Dashboard and data model screenshots
+└── LICENSE
 ```
 
 ---
-
-**Contact:** [Your Name] · [your.email@example.com](mailto:your.email@example.com) · [LinkedIn](#) · [GitHub](#)
