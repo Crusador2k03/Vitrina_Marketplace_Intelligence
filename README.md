@@ -1,405 +1,231 @@
 # Vitrina Marketplace Intelligence
 
-### Sales Performance, Delivery Operations & Customer Experience
+### Marketplace Performance Review: September 2016 – August 2018
 
-![Python](https://img.shields.io/badge/Python-Pandas-3776AB?logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Analysis-4479A1?logo=postgresql&logoColor=white)
-![BigQuery](https://img.shields.io/badge/Google-BigQuery-4285F4?logo=googlebigquery&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-Dashboards-F2C811?logo=powerbi&logoColor=black)
+| | |
+|---|---|
+| **Prepared for** | Marketplace leadership |
+| **Prepared by** | [Your Name], Data Analyst |
+| **Report date** | October 2026 |
+| **Data coverage** | Sep 2016 – Aug 2018 · 99.44K orders |
+| **Version** | 1.0 |
+| **Interactive dashboard** | [Open in Power BI](#) |
 
-A data analytics portfolio project using **Python, SQL, Google BigQuery, and Power BI** to analyze the Brazilian Olist e-commerce marketplace dataset.
+All monetary values are in **Brazilian reais (R$)**.
 
 ---
 
-## Table of Contents
+## Contents
 
-1. [Background and Overview](#1-background-and-overview)
-2. [Data Structure Overview](#2-data-structure-overview)
-3. [Executive Summary](#3-executive-summary)
-4. [Insights Deep Dive](#4-insights-deep-dive)
-5. [Recommendations](#5-recommendations)
-6. [Conclusion](#conclusion)
-7. [Project Limitations](#project-limitations)
+1. [Executive Summary](#1-executive-summary)
+2. [Scope & Objectives](#2-scope--objectives)
+3. [Key Findings](#3-key-findings)
+4. [Recommendations](#4-recommendations)
+5. [Using the Dashboard](#5-using-the-dashboard)
+6. [Data & Methodology](#6-data--methodology)
+7. [Planned Enhancements](#7-planned-enhancements)
+8. [Appendix: Technical Architecture](#appendix-technical-architecture)
 
 ---
 
-## 1. Background and Overview
+## 1. Executive Summary
 
-### Business Context
+Between September 2016 and August 2018 the marketplace received **99.44K orders**, of which **96.48K (97%) were delivered**, generating **R$15.42M** in delivered revenue at an average order value of **R$159.83**.
 
-Vitrina is a fictional e-commerce marketplace used as the business context for this project. The analysis is based on publicly available Olist marketplace data covering historical transactions from 2016 to 2018.
+Revenue grew quickly through 2017, peaked at **R$1.15M in November 2017**, and has since held near **R$1.0M a month**. The business is larger than a year ago, but month-on-month growth has levelled off.
 
-The marketplace connects customers with multiple sellers across product categories such as Health & Beauty, Watches & Gifts, Bed, Bath & Table, Sports & Leisure, and Computers & Accessories.
+| Orders | Delivered revenue | Avg. order value | Active sellers | Late deliveries | Repeat buyer rate |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **99.44K** | **R$15.42M** | **R$159.83** | **2.97K** | **6.77%** | **3.00%** |
 
-As a marketplace grows, increasing revenue and order volume are only part of the picture. Delivery reliability, seller performance, customer satisfaction, regional demand, and repeat purchasing also influence long-term business performance.
+**What is working**
+- Delivery is largely dependable: **91.89%** of delivered orders arrive before the estimated date.
+- Revenue is not dependent on a few categories or sellers. The largest category is about 9% of revenue, and the top 5 sellers together are under 10%.
 
-### Problem Statement
+**What needs attention**
+1. **Retention.** About 97% of customers buy only once.
+2. **Late deliveries.** Only 6.77% of orders are late, but those orders average roughly 2 out of 5 in review score, against roughly 4 out of 5 for everything else.
+3. **Geographic concentration.** São Paulo, Rio de Janeiro and Minas Gerais account for about 63% of delivered revenue.
 
-> How can Vitrina use transactional data to understand its sales performance, identify operational weaknesses, and uncover opportunities to improve customer experience and marketplace growth?
+The prioritised actions are in [Section 4](#4-recommendations).
 
-This project investigates the relationship between sales, products, sellers, customer behaviour, delivery performance, and payment methods to support data-driven business decisions.
+---
 
-### Key Business Questions
+## 2. Scope & Objectives
 
-| Area | Question |
-|---|---|
-| **Sales Performance** | How do revenue, order volume, and average order value change over time? |
-| **Product Performance** | Which product categories and products contribute most to delivered revenue? |
-| **Seller Performance** | Which sellers drive sales, and how concentrated is revenue across the seller base? |
-| **Customer Experience** | How are delivery delays associated with customer satisfaction? |
-| **Regional Performance** | Which customer states generate the most revenue, and where are delivery issues concentrated? |
-| **Customer Retention** | How frequently do customers return, and how much revenue do repeat customers contribute? |
-| **Payment Behaviour** | Which payment methods account for the largest share of recorded payment value? |
+This review answers four questions on marketplace performance:
 
-### Tools and Workflow
+| # | Area | Question |
+|---|------|----------|
+| 1 | **Sales** | How has revenue grown, and which categories and payment methods drive it? |
+| 2 | **Products & Sellers** | Which sellers and products perform best, and how concentrated is the seller base? |
+| 3 | **Delivery** | How reliable is delivery against the promised date, and how does it affect customer satisfaction? |
+| 4 | **Customers** | How loyal are customers, and how much revenue do repeat buyers contribute? |
 
-| Tool | Purpose |
-|---|---|
-| **Python (Pandas)** | Data cleaning, transformation, and validation |
-| **SQL** | Exploratory data analysis and business metric calculation |
-| **Google BigQuery** | Cloud data storage, reporting views, and SQL analysis |
-| **Power BI** | Interactive dashboards, KPI tracking, and visual exploration |
-| **Git and GitHub** | Version control and project documentation |
+---
 
-```mermaid
-flowchart LR
-    A[Raw Data] --> B[Python Cleaning & Validation]
-    B --> C[BigQuery Tables]
-    C --> D[SQL Reporting Views]
-    D --> E[Exploratory SQL Analysis]
-    E --> F[Power BI Dashboards]
+## 3. Key Findings
+
+### 3.1 Revenue growth and sales mix
+
+![Marketplace Pulse](images/marketplace-pulse.png)
+
+- **Growth has levelled off.** Monthly delivered revenue rose from under R$0.1M in late 2016 to a R$1.15M peak in November 2017, then held at roughly R$1.0M a month through August 2018.
+- **Volumes are still above last year.** In January to August 2018 the marketplace sold **60.32K items**, more than the **49.56K** sold across all of 2017.
+- **The category mix is balanced.** The top five categories together make up about 39% of revenue.
+
+  | Category | Delivered revenue |
+  |----------|------------------:|
+  | Health & Beauty | R$1.41M |
+  | Watches & Gifts | R$1.26M |
+  | Bed, Bath & Table | R$1.23M |
+  | Sports & Leisure | R$1.12M |
+  | Computers & Accessories | R$1.03M |
+
+- **Payments rely on two methods.** Credit card is about 79% of payment value (R$12.1M) and boleto about 18% (R$2.8M). Vouchers (R$0.3M) and debit cards (R$0.2M) are marginal.
+
+### 3.2 Products and sellers
+
+![Product and Seller Performance](images/product-seller-performance.png)
+
+- **A large and growing seller base.** 2.97K active sellers sold 110.20K items across 32.22K products, at an average item price of R$119.98. Active sellers grew from 129 in 2016 to 1.69K in 2017 and 2.33K in 2018 (January to August).
+- **Low dependence on individual sellers.** The top five sellers each earn R$201K to R$247K, and together account for under 10% of revenue.
+- **Sellers cluster in the south-east and south.** The map shows dense activity around São Paulo and far fewer sellers in the north and interior.
+- **Freight is a small share of revenue.** Item revenue is well above freight revenue throughout the period.
+
+### 3.3 Delivery performance
+
+![Customer Experience and Retention](images/customer-experience-retention.png)
+
+*The Customer Experience & Retention page covers both this section and 3.4.*
+
+- **Most orders arrive early.** 91.89% of delivered orders arrived before the estimated date, about 1.3% on the date, and 6.77% (about 7K orders) late.
+- **Late delivery is the main driver of poor reviews.** Late orders average roughly **2 / 5**, against roughly **4 / 5** for early and on-time orders.
+- **Satisfaction is high overall but polarised.** About 58% of reviews are 5 stars, but about 11% are 1 star, more than the 2-star and 3-star scores individually.
+- **Estimates look conservative.** With so few orders arriving exactly on time, the promised dates appear to carry a large buffer.
+
+### 3.4 Customers and retention
+
+- **Very few customers return.** Of 93.36K delivered customers, only 2.80K (3.00%) placed two or more orders.
+- **Repeat customers are worth more.** They generate R$864.19K, or **5.6%** of delivered revenue, about 1.9 times their share of the customer base.
+- **Revenue is concentrated in three states.** São Paulo contributes R$5.77M (about 37% of delivered revenue), followed by Rio de Janeiro (R$2.06M) and Minas Gerais (R$1.82M). Together they make up about 63%.
+
+> Figures marked "about" or "roughly" were calculated from dashboard values or read from chart labels.
+
+---
+
+## 4. Recommendations
+
+| Priority | Recommendation | Supporting evidence | Success measure |
+|:---:|----------------|---------------------|-----------------|
+| **High** | **Launch a retention programme.** Test post-purchase follow-ups and loyalty offers aimed at the second order. | About 97% of customers buy once; repeat customers earn about 1.9× their share of the base | Repeat buyer rate; repeat-customer revenue share |
+| **High** | **Cut late deliveries in the weakest regions and seller groups.** Use the dashboard's state and seller filters to find them. | 6.77% late orders, with review scores near 2 / 5 | Late delivery %; average review score by delivery performance |
+| **High** | **Re-accelerate growth.** Review acquisition and conversion activity, since monthly revenue has held near R$1.0M since Nov 2017. | Plateau after the Nov 2017 peak, despite higher item volumes in 2018 | Monthly delivered revenue; delivered orders |
+| **Medium** | **Reduce regional concentration.** Recruit sellers and build logistics capacity outside the south-east. | About 63% of revenue from SP, RJ and MG; sellers cluster in the south-east | Revenue share outside the top three states; active sellers by state |
+| **Medium** | **Review delivery estimates.** Tighten promised dates gradually and monitor reviews. | 91.89% of orders arrive early; about 1.3% on the date | Early, on-time and late share; average review score |
+| **Medium** | **Protect payment reliability.** Prioritise checkout stability for credit card and boleto. | About 79% and 18% of payment value | Payment value by method |
+
+---
+
+## 5. Using the Dashboard
+
+The interactive Power BI report has three pages. Slicers filter every visual on a page.
+
+| Page | Answers | Slicers |
+|------|---------|---------|
+| **Marketplace Pulse** | How large is the business, how is it trending, and how are orders delivered and paid for? | n/a |
+| **Product & Seller Performance** | Which sellers, products and categories lead, and where are sellers located? | Product category, purchase period, seller state, seller city |
+| **Customer Experience & Retention** | How loyal and satisfied are customers, and how does delivery affect reviews? | Customer state, purchase period |
+
+---
+
+## 6. Data & Methodology
+
+**Source.** The *Brazilian E-Commerce Public Dataset by Olist* (Kaggle): anonymised order, item, payment, review, customer, seller and product data for 2016 to 2018.
+
+**Approach.** Revenue, customer and delivery KPIs are calculated on **delivered orders only**, so cancelled or unfulfilled orders do not inflate results. Customers are counted by `customer_unique_id`, because the source assigns a new `customer_id` to every order.
+
+### Metric definitions
+
+| Metric | Definition |
+|--------|------------|
+| **Delivered Orders** | Orders with status *delivered* |
+| **Delivered Customers** | Unique customers with at least one delivered order |
+| **Delivered Revenue** | Revenue from delivered orders |
+| **AOV (Delivered Orders)** | Delivered revenue ÷ delivered orders |
+| **Average Delivered Item Price** | Average item price across delivered items |
+| **Active Sellers** | Sellers with delivered sales in the selected period |
+| **Delivery Performance** | Delivered date compared with the estimated delivery date: *Early*, *On Time*, *Late* |
+| **Repeat Customers** | Customers with 2 or more delivered orders |
+| **Repeat Buyer Rate** | Repeat customers ÷ delivered customers |
+| **Repeat-Customer Revenue Share** | Delivered revenue from repeat customers ÷ total delivered revenue |
+| **Freight Share %** | Freight revenue as a share of delivered revenue |
+
+### Limitations
+
+- **Historical data.** Findings describe 2016 to 2018, not current performance.
+- **Sparse 2016.** Only a few hundred orders exist for 2016, so its percentages are not reliable.
+- **No cost or margin data.** The analysis covers revenue, not profitability.
+- **Repeat behaviour.** Repeat metrics reflect this dataset's observation window; many customers appear only once.
+- **Review text not analysed.** Only review scores and a written-feedback flag are used.
+- **Association, not causation.** Links such as late delivery and low review scores are observed relationships.
+
+---
+
+## 7. Planned Enhancements
+
+- Year-to-date, month-on-month and year-on-year comparison measures
+- Cohort and RFM analysis for customer segmentation
+- Sentiment analysis of Portuguese review comments
+- Revenue forecasting for the next quarter
+
+---
+
+## Appendix: Technical Architecture
+
+**Pipeline**
+
+```
+Raw CSV files → Python (Pandas) → BigQuery tables → SQL reporting views → Power BI model → Dashboard
+```
+
+| Stage | Tool | Purpose |
+|-------|------|---------|
+| Data preparation | Python (Pandas) | Loading, profiling and cleaning the raw files |
+| Data warehouse | SQL on Google BigQuery | Reporting views (`vw_*`) at order, order-item, payment, customer and category grain |
+| Data model | Power BI + DAX | Relationships, a dedicated `_Measures` table and delivered-only logic |
+| Reporting | Power BI | Three-page interactive dashboard |
+
+**Data model**
+
+![Data model](images/data-model.png)
+
+| Table | Grain (one row per…) | Role |
+|-------|----------------------|------|
+| `vw_order_reporting` | order | Central reporting table (dates, status, delivery performance, order totals) |
+| `vw_order_item_detail` | order item | Product, seller, price and freight detail |
+| `vw_payment_detail` | order payment | Payment type, installments and value |
+| `reviews` | review | Review score and written-feedback flag |
+| `vw_customer_summary` | unique customer | Purchase frequency and customer-level revenue |
+| `vw_order_category` | order × category | Pre-aggregated category revenue and review score |
+| `vw_dim_category` | category | Shared category dimension |
+| `Dim_Date` | date | Calendar dimension (year, quarter, month) |
+| `Customer Frequency Bucket` | bucket | Disconnected table for ordered buckets (1, 2, 3+ orders) |
+| `_Measures` | n/a | All DAX measures |
+
+All relationships are one-to-many with single-direction filtering. Planned model enhancements: dedicated seller and customer dimensions.
+
+**Repository contents**
+
+```
+.
+├── README.md
+├── python/        # Data loading, cleaning and profiling notebooks
+├── sql/           # BigQuery view definitions (vw_*)
+├── powerbi/       # Power BI report (.pbix)
+└── images/        # Dashboard and data model screenshots
 ```
 
 ---
 
-## 2. Data Structure Overview
-
-### Dataset Overview
-
-The project uses eight cleaned datasets from the Olist marketplace data model.
-
-| Dataset | Description |
-|---|---|
-| `orders` | Order status, purchase timestamps, and delivery dates |
-| `order_items` | Product, seller, item price, and freight charges |
-| `order_payments` | Payment methods, recorded payment values, and installments |
-| `order_reviews` | Customer review scores and written feedback |
-| `customers` | Customer identifiers and geographic information |
-| `products` | Product identifiers, categories, and physical attributes |
-| `sellers` | Seller identifiers and geographic information |
-| `category_translation` | Translation of product categories into English |
-
-The cleaned CSVs are loaded into BigQuery for SQL analysis. Python validation checks support consistency in data types, keys, missing values, business rules, and relationships between datasets.
-
-### BigQuery Reporting Views
-
-Six reporting views were developed to provide reusable datasets for analysis and reporting.
-
-| Reporting View | Grain | Purpose |
-|---|---|---|
-| `vw_order_reporting` | One row per order | Order KPIs, delivery performance, item and freight revenue, payments, and reviews |
-| `vw_order_item_detail` | One row per order item | Product and seller performance, item-level revenue, and geographic filtering |
-| `vw_order_category` | One row per delivered order-category pair | Category-level revenue and associated order-review metrics |
-| `vw_payment_detail` | One row per payment record | Payment-method analysis |
-| `vw_customer_summary` | One row per unique customer | Customer purchase frequency and revenue contribution |
-| `vw_dim_category` | One row per normalized category | Shared category dimension for reporting |
-
-The views preserve different levels of detail so that order-level, item-level, payment-level, and customer-level metrics can be analyzed without unintentionally multiplying records.
-
-### Revenue Definition
-
-```
-Delivered Revenue = Item Revenue + Freight Revenue
-```
-
-Only orders marked as **delivered** are included in delivered revenue calculations.
-
-This is a measure of recorded item prices and freight charges, **not** profit or net accounting revenue. Recorded payment value is analyzed separately because it does not necessarily reconcile perfectly with item and freight totals.
-
----
-
-## 3. Executive Summary
-
-### Key Performance Indicators
-
-| KPI | Result |
-|---|---|
-| Total Orders | **99,441** |
-| Delivered Orders | **96,478** |
-| Customers with Delivered Orders | **93,358** |
-| Total Delivered Revenue | **R$15.42M** |
-| Average Order Value (Delivered Orders) | **R$159.83** |
-
-### Headline Findings
-
-**1. Strong historical revenue growth**
-Between January–August 2017 and January–August 2018, delivered revenue increased by approximately **143.4%**, while delivered orders increased by approximately **139.9%**. Average order value rose by only about **1.4%**, indicating that higher order volume was the primary contributor to growth.
-
-**2. Delivery performance is associated with customer satisfaction**
-Among delivered orders with valid delivery dates, **6.77%** were late. Late orders had an average review score of **2.27/5**, compared with **4.29/5** for early deliveries.
-
-**3. Revenue is geographically concentrated**
-São Paulo contributed **37.42%** of delivered revenue. Together, São Paulo, Rio de Janeiro, and Minas Gerais accounted for approximately **62.55%**.
-
-**4. A small share of customers made repeat purchases**
-Approximately **97%** of customers with at least one delivered order had only one delivered order during the observed period. Repeat purchasing is therefore an opportunity for further investigation.
-
-**5. Revenue is distributed across a broad seller base**
-The marketplace had **2,970** sellers with delivered sales. The top seller accounted for **1.60%** of revenue, while **551** sellers collectively accounted for 80%.
-
-### Executive Dashboard
-
-<!-- PLACEHOLDER: Insert a screenshot of the Power BI Executive Summary / Marketplace Pulse page. -->
-
-### Core KPI and Trend Results
-
-<!-- PLACEHOLDER: Insert the output of 01_Core_Business_KPIs.sql. -->
-
-<!-- PLACEHOLDER: Insert the output of 02_Monthly_Revenue_and_Order_Trends.sql. -->
-
----
-
-## 4. Insights Deep Dive
-
-### 4.1. Sales Performance and Growth
-
-The January–August comparison highlights the scale of historical growth.
-
-| Metric | Jan–Aug 2017 | Jan–Aug 2018 | Change |
-|---|---:|---:|---:|
-| Total Orders | 22,968 | 53,991 | +135.1% |
-| Delivered Orders | 21,998 | 52,783 | +139.9% |
-| Delivered Revenue | ~R$3.47M | R$8.45M | +143.4% |
-| Average Order Value | R$157.87 | R$160.12 | +1.4% |
-
-November 2017 was the strongest month in the historical monthly analysis, generating approximately **R$1.15M** in delivered revenue, an increase of about **53.6%** from October.
-
-The results indicate that increased order volume, rather than a substantial increase in average order value, was the main contributor to observed growth.
-
-> **Business implication:** Understanding the categories, sellers, and regions contributing to growth can help identify opportunities worth investigating further.
-
-**SQL evidence** — `02_Monthly_Revenue_and_Order_Trends.sql`
-
-<!-- PLACEHOLDER: Insert monthly revenue and order-growth output from 02_Monthly_Revenue_and_Order_Trends.sql. -->
-
-### 4.2. Product Category and Product Performance
-
-The five leading product categories contributed approximately **39.26%** of delivered revenue.
-
-| Product Category | Delivered Revenue | Revenue Share |
-|---|---:|---:|
-| Health & Beauty | R$1.412M | 9.16% |
-| Watches & Gifts | R$1.264M | 8.20% |
-| Bed, Bath & Table | R$1.225M | 7.95% |
-| Sports & Leisure | R$1.118M | 7.25% |
-| Computers & Accessories | R$1.033M | 6.70% |
-
-Health & Beauty was the largest category by delivered revenue. Its average review score was **4.23/5**, with an **11.42%** low-review share.
-
-**Office Furniture** is a category worth investigating because it generated approximately **R$335,211** in delivered revenue while recording an average review score of **3.64/5** and a low-review share of **21.95%** across approximately 1,244 reviewed orders.
-
-The product analysis also identifies the highest-revenue product IDs. Since the dataset does not provide actual product names, the results use product identifiers and category labels rather than invented product names.
-
-> **Business implication:** Revenue contribution and customer feedback should be evaluated together to identify categories that perform well commercially and categories that warrant closer quality investigation.
-
-**SQL evidence** — `03_Product_Category_Performance_and_Satisfaction.sql`, `04_Top_Products_by_Delivered_Revenue.sql`
-
-<!-- PLACEHOLDER: Insert the output of 03_Product_Category_Performance_and_Satisfaction.sql. -->
-
-<!-- PLACEHOLDER: Insert the output of 04_Top_Products_by_Delivered_Revenue.sql. -->
-
-### 4.3. Seller Performance and Revenue Concentration
-
-The seller analysis identified **2,970** sellers with delivered sales.
-
-| Concentration Metric | Result |
-|---|---:|
-| Top Seller Revenue Share | 1.60% |
-| Top 10 Sellers Revenue Share | 12.93% |
-| Top 20 Sellers Revenue Share | 21.04% |
-| Top 50 Sellers Revenue Share | 32.54% |
-| Sellers Accounting for 80% of Revenue | 551 |
-
-The marketplace's revenue is distributed across many sellers rather than being dominated by a single seller. However, a subset of sellers contributes a substantial share of total delivered revenue.
-
-> **Business implication:** Seller performance management should consider sales contribution, order volume, geographic distribution, delivery outcomes, and customer feedback.
-
-**SQL evidence** — `05_Seller_Performance.sql`, `06_Seller_Revenue_Concentration.sql`
-
-<!-- PLACEHOLDER: Insert the output of 05_Seller_Performance.sql. -->
-
-<!-- PLACEHOLDER: Insert the output of 06_Seller_Revenue_Concentration.sql. -->
-
-### 4.4. Customer Repeat Purchasing
-
-Among the **93,358** customers with at least one delivered order, approximately **97%** placed only one delivered order during the observation window.
-
-| Customer Segment | Customers | Customer Share |
-|---|---:|---:|
-| One Delivered Order | 90,557 | 97.0% |
-| Exactly Two Delivered Orders | 2,573 | 2.8% |
-| Three or More Delivered Orders | 228 | 0.2% |
-
-The 2,801 customers with multiple delivered orders contributed approximately **5.61%** of delivered revenue.
-
-> **Business implication:** Customer retention deserves further investigation. The observed repeat-purchase rate is not definitive evidence of long-term retention because the dataset covers a finite historical period.
-
-**SQL evidence** — `07_Customer_Repeat_Purchase_and_Revenue_Contribution.sql`
-
-<!-- PLACEHOLDER: Insert the output of 07_Customer_Repeat_Purchase_and_Revenue_Contribution.sql. -->
-
-### 4.5. Payment Method Distribution
-
-| Payment Method | Share of Recorded Payment Value |
-|---|---:|
-| Credit card | 78.46% |
-| Boleto | 17.96% |
-| Voucher | 2.22% |
-| Debit card | 1.35% |
-
-The payment results describe recorded transaction values and payment-method distribution. They do not measure checkout abandonment or failed payment attempts.
-
-> **Business implication:** Credit-card and boleto flows deserve particular attention in payment reporting because they account for most recorded payment value.
-
-**SQL evidence** — `08_Payment_Method_Distribution.sql`
-
-<!-- PLACEHOLDER: Insert the output of 08_Payment_Method_Distribution.sql. -->
-
-### 4.6. Delivery Performance and Customer Satisfaction
-
-Among **96,476** delivered orders with both actual and estimated delivery dates, **91.89%** arrived early, **6.77%** arrived late, and **1.34%** arrived exactly on the estimated date.
-
-| Delivery Outcome | Average Review Score | Low-Review Share (Score ≤ 2) |
-|---|---:|---:|
-| Early | 4.29 / 5 | 9.19% |
-| On Estimated Date Exactly | 4.04 / 5 | 12.27% |
-| Late | 2.27 / 5 | 62.36% |
-
-Customer satisfaction deteriorated further as delay duration increased.
-
-| Delivery Timing | Average Review Score | Low-Review Share |
-|---|---:|---:|
-| 1–3 Days Late | 3.29 | 32.18% |
-| 4–7 Days Late | 2.11 | 67.56% |
-| 8+ Days Late | 1.70 | 79.18% |
-
-> **Business implication:** Longer delivery delays are strongly associated with worse customer feedback. The relationship provides a clear operational area to investigate, although the analysis does not establish causation.
-
-**SQL evidence** — `09_Delivery_Performance_and_Customer_Satisfaction.sql`, `10_Delivery_Delay_and_Satisfaction_Correlation.sql`
-
-<!-- PLACEHOLDER: Insert the output of 09_Delivery_Performance_and_Customer_Satisfaction.sql. -->
-
-<!-- PLACEHOLDER: Insert the output of 10_Delivery_Delay_and_Satisfaction_Correlation.sql. -->
-
-### 4.7. Regional Demand and Delivery Performance
-
-Three customer states generated approximately **62.55%** of delivered revenue.
-
-| Customer State | Delivered Revenue | Revenue Share |
-|---|---:|---:|
-| São Paulo | R$5.77M | 37.42% |
-| Rio de Janeiro | R$2.055M | 13.33% |
-| Minas Gerais | R$1.819M | 11.80% |
-
-Delivery outcomes vary substantially by region. São Paulo had the largest number of late deliveries, while Rio de Janeiro and Bahia recorded late-delivery rates above 12%.
-
-Smaller-volume states, such as Alagoas, also showed high late-delivery rates, but their results require cautious interpretation because relatively few orders can produce volatile percentages.
-
-> **Business implication:** Operational priorities should consider both the volume of late orders and the late-delivery rate. These measures distinguish the regions where the most customers are affected from those where late delivery is disproportionately common.
-
-**SQL evidence** — `11_RegionalDemand_DeliveryPerformance_CustomerSatisfaction.sql`, `12_Delivery_delay_Severity.sql`
-
-<!-- PLACEHOLDER: Insert the output of 11_RegionalDemand_DeliveryPerformance_CustomerSatisfaction.sql. -->
-
-<!-- PLACEHOLDER: Insert the output of 12_Delivery_delay_Severity.sql. -->
-
----
-
-## 5. Recommendations
-
-### 5.1. Improve Delivery Reliability
-
-Delivery delays have the clearest observed association with customer dissatisfaction.
-
-- Investigate delays exceeding four days, where low-review shares increase substantially.
-- Prioritize São Paulo for reducing the largest absolute number of late orders.
-- Investigate high late-delivery rates in Rio de Janeiro and Bahia.
-- Review delivery estimates and communicate proactively with customers when delays are expected.
-- Monitor whether improvements in delivery reliability coincide with better customer feedback.
-
-**Suggested KPIs:** Late-delivery rate, average days late, 90th-percentile delay, average review score, and low-review share.
-
-### 5.2. Focus on Category-Level Customer Experience
-
-Use category revenue and customer feedback together to determine where to protect performance and where to investigate possible quality issues.
-
-- Investigate Office Furniture at the product and seller levels.
-- Identify recurring issues among products associated with low review scores.
-- Monitor leading categories for deterioration in review outcomes.
-- Evaluate review counts alongside average ratings and low-review shares to avoid overreacting to small samples.
-
-**Suggested KPIs:** Delivered revenue, revenue share, items sold, average review score, and low-review share.
-
-### 5.3. Develop Customer Retention Strategies
-
-The low observed repeat-purchase rate suggests that customer retention merits further investigation.
-
-- Build cohort-based repeat-purchase measurements using customers' first delivered orders.
-- Explore post-delivery follow-ups and relevant cross-sell or replenishment initiatives.
-- Test retention interventions against a comparison group where feasible.
-- Evaluate whether repeat purchases increase without harming customer satisfaction or revenue per order.
-
-**Suggested KPIs:** Repeat-purchase rate, time to second delivered order, repeat-customer revenue share, and revenue per delivered order.
-
-### 5.4. Strengthen Seller Performance Management
-
-Use consistent performance measures across the seller base, with additional attention to sellers that contribute substantial revenue.
-
-- Create seller scorecards combining revenue, delivered orders, product breadth, and customer experience.
-- Investigate high-contribution sellers with weaker delivery or review outcomes.
-- Maintain performance standards for the broader seller base rather than focusing exclusively on the largest sellers.
-- Establish a careful attribution method before assigning an order-level delay or review to an individual seller.
-
-**Suggested KPIs:** Seller delivered revenue, revenue share, delivered order count, late-delivery rate, and review outcomes.
-
-### 5.5. Manage Regional Performance Using Both Demand and Risk
-
-Regional investment decisions should account for sales contribution and delivery reliability.
-
-- Protect service quality in high-revenue states.
-- Investigate regions with high late-delivery rates even when their revenue contribution is smaller.
-- Apply minimum sample-size thresholds when comparing smaller regions.
-- Distinguish customer-state demand from seller-state and seller-city geography.
-
-**Suggested KPIs:** Delivered revenue by state, revenue share, late-order count, late-delivery rate, and customer satisfaction.
-
-### 5.6. Support Growth With Balanced Monitoring
-
-Historical revenue growth was primarily volume-driven.
-
-- Monitor order volume and delivered revenue together.
-- Track AOV, cancellations, delivery reliability, and customer satisfaction alongside growth.
-- Investigate the categories, regions, and sellers contributing to major monthly peaks.
-- Use consistent reporting periods when comparing years, particularly because later months of 2018 are sparse or incomplete.
-
-**Suggested KPIs:** Monthly delivered revenue, delivered orders, AOV, cancellation rate, late-delivery rate, and revenue by category and region.
-
----
-
-## Conclusion
-
-This project combines data cleaning and validation, SQL-based business analysis, reusable BigQuery reporting views, and interactive Power BI reporting to examine marketplace performance across sales, products, sellers, customers, payments, and delivery operations.
-
-The findings identify several practical areas for further investigation: improving delivery reliability, monitoring category-level customer experience, developing repeat purchasing, and strengthening seller-performance management.
-
-All findings reflect historical Olist data from 2016–2018. Vitrina is a fictional business case, and the observed relationships indicate areas for investigation rather than proven causal effects.
-
----
-
-## Project Limitations
-
-- Delivered revenue represents recorded item prices plus freight charges, not profit or net accounting revenue.
-- Recorded payment value is analyzed separately from delivered revenue.
-- Customer-review scores are aggregated at the order level. When associated with product categories, they represent category-associated order satisfaction, not individual product ratings.
-- The finite observation period limits conclusions about long-term customer retention.
-- The analysis is observational and does not independently establish the causes of delivery delays, sales growth, or customer dissatisfaction.
+**Contact:** [Your Name] · [your.email@example.com](mailto:your.email@example.com) · [LinkedIn](#) · [GitHub](#)
