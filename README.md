@@ -58,6 +58,7 @@ Revenue grew quickly through 2017, peaked at **R$1.15M in November 2017**, and h
 3. **Geographic concentration.** São Paulo, Rio de Janeiro and Minas Gerais account for about 63% of delivered revenue.
 
 The prioritised actions are in [Section 4](#4-recommendations).
+| **Interactive dashboard** | [Open in Power BI](https://app.powerbi.com/view?r=eyJrIjoiMmFmYmQ3NzctNzZmMi00YzZiLWI4MzItN2YyZTU3NTJkNDJkIiwidCI6IjAzYjFkOWZiLThhODktNDNlNy04NmQ2LWUxYzc2MGQ2MjJhMyJ9&pageName=c3056fc56631bad852d6) |
 
 ---
 
