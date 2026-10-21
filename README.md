@@ -1,24 +1,42 @@
 # Vitrina Marketplace Intelligence
+## 1. Project Context
 
-### Marketplace Performance Review: September 2016 – August 2018
+### About Vitrina
+
+**Vitrina** is an online marketplace that connects independent sellers across Brazil with customers nationwide and tracks each order from purchase through payment, delivery and customer review. Its focus is *Sales & Customer Experience*.
+
+> **Note:** Vitrina is a **sample company created for this analysis**. Its trading history is represented by the anonymised *Brazilian E-Commerce Public Dataset by Olist*, so the figures in this report describe that dataset, not a real Vitrina business.
+
+### Business situation
+
+After a year of rapid growth in 2017, Vitrina's leadership team wants to know whether the marketplace is healthy and where to focus next. The analytics team was asked to review performance across sales, sellers, delivery and customers, and to turn the findings into clear priorities. This report and its interactive dashboard are the result.
+
+### Objectives
+
+The review answers four questions:
+
+| # | Area | Question |
+|---|------|----------|
+| 1 | **Sales** | How has revenue grown, and which categories and payment methods drive it? |
+| 2 | **Products & Sellers** | Which sellers and products perform best, and how concentrated is the seller base? |
+| 3 | **Delivery** | How reliable is delivery against the promised date, and how does it affect customer satisfaction? |
+| 4 | **Customers** | How loyal are customers, and how much revenue do repeat buyers contribute? |
+
+### Scope
 
 | | |
 |---|---|
-| **Prepared for** | Marketplace leadership |
-| **Prepared by** | [Your Name], Data Analyst |
-| **Report date** | October 2026 |
-| **Data coverage** | Sep 2016 – Aug 2018 · 99.44K orders |
-| **Version** | 1.0 |
-| **Interactive dashboard** | [Open in Power BI](#) |
-
-All monetary values are in **Brazilian reais (R$)**.
+| **Period** | September 2016 – August 2018 |
+| **Coverage** | Sales, products, sellers, customers, payments, delivery and reviews |
+| **Deliverables** | This report and a three-page interactive Power BI dashboard |
 
 ---
 
+
 ## Contents
 
-1. [Executive Summary](#1-executive-summary)
-2. [Scope & Objectives](#2-scope--objectives)
+1. [Project Context](#1-project-context)
+2. [Executive Summary](#2-executive-summary)
 3. [Key Findings](#3-key-findings)
 4. [Recommendations](#4-recommendations)
 5. [Using the Dashboard](#5-using-the-dashboard)
@@ -28,9 +46,9 @@ All monetary values are in **Brazilian reais (R$)**.
 
 ---
 
-## 1. Executive Summary
+## 2. Executive Summary
 
-Between September 2016 and August 2018 the marketplace received **99.44K orders**, of which **96.48K (97%) were delivered**, generating **R$15.42M** in delivered revenue at an average order value of **R$159.83**.
+Between September 2016 and August 2018 Vitrina received **99.44K orders**, of which **96.48K (97%) were delivered**, generating **R$15.42M** in delivered revenue at an average order value of **R$159.83**.
 
 Revenue grew quickly through 2017, peaked at **R$1.15M in November 2017**, and has since held near **R$1.0M a month**. The business is larger than a year ago, but month-on-month growth has levelled off.
 
@@ -48,19 +66,6 @@ Revenue grew quickly through 2017, peaked at **R$1.15M in November 2017**, and h
 3. **Geographic concentration.** São Paulo, Rio de Janeiro and Minas Gerais account for about 63% of delivered revenue.
 
 The prioritised actions are in [Section 4](#4-recommendations).
-
----
-
-## 2. Scope & Objectives
-
-This review answers four questions on marketplace performance:
-
-| # | Area | Question |
-|---|------|----------|
-| 1 | **Sales** | How has revenue grown, and which categories and payment methods drive it? |
-| 2 | **Products & Sellers** | Which sellers and products perform best, and how concentrated is the seller base? |
-| 3 | **Delivery** | How reliable is delivery against the promised date, and how does it affect customer satisfaction? |
-| 4 | **Customers** | How loyal are customers, and how much revenue do repeat buyers contribute? |
 
 ---
 
@@ -141,7 +146,7 @@ The interactive Power BI report has three pages. Slicers filter every visual on 
 
 ## 6. Data & Methodology
 
-**Source.** The *Brazilian E-Commerce Public Dataset by Olist* (Kaggle): anonymised order, item, payment, review, customer, seller and product data for 2016 to 2018.
+**Source.** The *Brazilian E-Commerce Public Dataset by Olist* (Kaggle): anonymised order, item, payment, review, customer, seller and product data for 2016 to 2018. Vitrina is a sample company, and this dataset stands in for its trading history.
 
 **Approach.** Revenue, customer and delivery KPIs are calculated on **delivered orders only**, so cancelled or unfulfilled orders do not inflate results. Customers are counted by `customer_unique_id`, because the source assigns a new `customer_id` to every order.
 
